@@ -1,112 +1,102 @@
 #!/usr/bin/env python3
-"""Update data/calendar.json from StockEasy market-calendar earnings data."""
+"""Write the photo-based Korean provisional earnings calendar."""
 
 import json
 import os
-import sys
-from datetime import datetime, timedelta, timezone
-from urllib.error import HTTPError, URLError
-from urllib.parse import urlencode
-from urllib.request import Request, urlopen
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_FILE = os.path.join(ROOT, "data", "calendar.json")
-API_URL = "https://stockeasy.intellio.kr/stockdata/api/v1/market-calendar"
-KST = timezone(timedelta(hours=9))
-MONTH_WINDOW = int(os.environ.get("STOCKEASY_MONTH_WINDOW", "6"))
 
+START_DATE = "2026-07-16"
+END_DATE = "2026-08-14"
+PHOTO_UPDATED = "2026-07-15 사진 기준"
 
-def add_months(base, offset):
-    month_index = base.month - 1 + offset
-    year = base.year + month_index // 12
-    month = month_index % 12 + 1
-    return year, month
-
-
-def fetch_month(year, month):
-    query = urlencode({"year": year, "month": month, "category": "earnings"})
-    request = Request(
-        f"{API_URL}?{query}",
-        headers={
-            "Accept": "application/json",
-            "User-Agent": "earnings-calendar/1.0 (+https://kjysss2.github.io/earnings-calendar/)",
-        },
-    )
-
-    try:
-        with urlopen(request, timeout=30) as response:
-            return json.loads(response.read().decode("utf-8"))
-    except HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"StockEasy API error: HTTP {exc.code}\n{detail}") from exc
-    except URLError as exc:
-        raise RuntimeError(f"StockEasy API connection failed: {exc}") from exc
-    except TimeoutError as exc:
-        raise RuntimeError("StockEasy API request timed out.") from exc
-
-
-def normalize_item(item):
-    date = str(item.get("record_date") or "").strip()
-    company = str(item.get("company") or "").strip()
-    symbol = str(item.get("symbol") or "").strip()
-
-    if not date or not company:
-        return None
-
-    entry = {
-        "date": date,
-        "session": "tba",
-        "name": company,
-        "ticker": symbol,
-        "market": str(item.get("market") or "").strip(),
-        "eventType": str(item.get("event_type") or "").strip(),
-    }
-
-    detail = str(item.get("detail") or "").strip()
-    if detail:
-        entry["detail"] = detail
-
-    return entry
+PHOTO_SCHEDULE = {'2026-07-22': ['LG디스플레이', 'OCI홀딩스', 'OCI', '유니드', '제주은행'],
+ '2026-07-23': ['삼성E&A', '삼성바이오로직스', '두산밥캣', 'KB금융', '신한지주'],
+ '2026-07-24': ['삼성중공업', '삼성에피스홀딩스', '현대로템', '현대제철', '현대모비스', 'LX세미콘', '제일기획'],
+ '2026-07-27': ['LG이노텍', '한화오션', 'HD현대마린솔루션', 'HDC랩스'],
+ '2026-07-28': ['한미사이언스', '한미약품'],
+ '2026-07-29': ['HD한국조선해양', 'GS건설', '한화솔루션', '크래프톤', '넥센타이어'],
+ '2026-07-30': ['삼성전기', 'POSCO홀딩스', 'LG에너지솔루션', '삼성SDI', 'SK아이이테크놀로지', '삼성에스디에스', '케이뱅크'],
+ '2026-07-31': ['LG화학', '에코프로비엠', '한온시스템', '현대건설', '한화에어로스페이스', 'LG씨엔에스'],
+ '2026-08-04': ['에코프로', '에코프로머티', '에코프로에이치엔'],
+ '2026-08-05': ['카카오뱅크'],
+ '2026-08-06': ['LG유플러스', 'CJ ENM', '스튜디오드래곤'],
+ '2026-08-07': ['파마리서치'],
+ '2026-08-13': ['달바글로벌'],
+ '2026-08-14': ['삼양식품',
+                '피에스케이',
+                '피에스케이홀딩스',
+                'HPSP',
+                '예스티',
+                '프로텍',
+                '하나마이크론',
+                '티에스이',
+                '마이크로투나노',
+                '두산테스나',
+                'LB세미콘',
+                '와이씨',
+                '유니테스트',
+                '인텍플러스',
+                '제우스',
+                '마이크로컨텍솔',
+                '오킨스전자',
+                '메가터치',
+                '웰덱스',
+                '에프에스티',
+                '솔브레인',
+                '솔브레인홀딩스',
+                'KX하이텍',
+                '와이씨켐',
+                '이엔에프테크놀로지',
+                '덕산테코피아',
+                '퓨릿',
+                '에스에이엠티',
+                '유니퀘스트',
+                '미코',
+                '제주반도체',
+                '코리아써키트',
+                '이수페타시스',
+                '한양디지텍',
+                '타이거일렉',
+                '덕산하이메탈',
+                '인터플렉스',
+                '기가비스',
+                '삼화콘덴서',
+                '아모텍',
+                'LS',
+                'LS ELECTRIC',
+                'LS머트리얼즈',
+                '가온전선',
+                '비에이치아이',
+                '보성파워텍',
+                '비나텍',
+                '아모센스',
+                '서진시스템',
+                '한진칼',
+                '대웅제약',
+                '제닉',
+                'STX엔진',
+                '세진중공업',
+                '아이티센글로벌',
+                '이수화학',
+                '이수스페셜티케미컬',
+                '현대해상']}
 
 
 def build_calendar():
-    current_month = datetime.now(KST).date().replace(day=1)
-    entries = []
-    seen = set()
-
-    for offset in range(MONTH_WINDOW):
-        year, month = add_months(current_month, offset)
-        payload = fetch_month(year, month)
-
-        for item in payload.get("items", []):
-            entry = normalize_item(item)
-            if entry is None:
-                continue
-
-            key = (
-                entry["date"],
-                entry.get("ticker", ""),
-                entry.get("name", ""),
-                entry.get("eventType", ""),
-            )
-
-            if key in seen:
-                continue
-
-            seen.add(key)
-            entries.append(entry)
-
-    entries.sort(key=lambda item: (item["date"], item.get("name", ""), item.get("ticker", "")))
-
-    updated = datetime.now(KST).strftime("%Y-%m-%d %H:%M KST")
-    fallback_date = datetime.now(KST).strftime("%Y-%m-%d")
+    entries = [
+        {"date": date, "session": "tba", "name": name}
+        for date, names in PHOTO_SCHEDULE.items()
+        for name in names
+    ]
 
     return {
-        "title": "\uAD6D\uB0B4 \uC2E4\uC801\uBC1C\uD45C \uC77C\uC815 (StockEasy)",
-        "source": "StockEasy \uC2DC\uC7A5\uC77C\uC815 \uC2E4\uC801\uBC1C\uD45C",
-        "updated": updated,
-        "startDate": entries[0]["date"] if entries else fallback_date,
-        "endDate": entries[-1]["date"] if entries else fallback_date,
+        "title": "한국 잠정실적발표 일정(변동 가능)",
+        "source": "사용자 제공 잠정실적발표 일정 이미지",
+        "updated": PHOTO_UPDATED,
+        "startDate": START_DATE,
+        "endDate": END_DATE,
         "entries": entries,
     }
 
@@ -128,8 +118,4 @@ def main():
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as exc:
-        print(str(exc), file=sys.stderr)
-        sys.exit(1)
+    main()
