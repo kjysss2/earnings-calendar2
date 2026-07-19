@@ -1,7 +1,7 @@
 {
   "title": "한국 잠정실적발표 일정(변동 가능)",
-  "source": "사용자 제공 잠정실적발표 일정 이미지",
-  "updated": "2026-07-15 사진 기준",
+  "source": "사용자 제공 잠정실적발표 일정 이미지 + 삼성전자·SK하이닉스 공식 IR",
+  "updated": "2026-07-19 기준 (기존 이미지 + 삼성전자·SK하이닉스 공식 IR 일정 반영)",
   "startDate": "2026-07-16",
   "endDate": "2026-08-14",
   "entries": [
@@ -123,6 +123,15 @@
     {
       "date": "2026-07-29",
       "session": "tba",
+      "name": "SK하이닉스",
+      "ticker": "000660",
+      "market": "KOSPI",
+      "detail": "오전 9시",
+      "hl": true
+    },
+    {
+      "date": "2026-07-29",
+      "session": "tba",
       "name": "HD한국조선해양"
     },
     {
@@ -144,6 +153,15 @@
       "date": "2026-07-29",
       "session": "tba",
       "name": "넥센타이어"
+    },
+    {
+      "date": "2026-07-30",
+      "session": "tba",
+      "name": "삼성전자",
+      "ticker": "005930",
+      "market": "KOSPI",
+      "detail": "오전 10시",
+      "hl": true
     },
     {
       "date": "2026-07-30",
