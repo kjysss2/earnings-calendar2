@@ -1,124 +1,174 @@
 {
-  "title": "한국 잠정실적발표 일정(변동 가능)",
-  "source": "사용자 제공 잠정실적발표 일정 이미지 + 삼성전자·SK하이닉스 공식 IR",
-  "updated": "2026-07-19 기준 (기존 이미지 + 삼성전자·SK하이닉스 공식 IR 일정 반영)",
+  "title": "한국 잠정실적발표 일정(시간 포함·변동 가능)",
+  "source": "기업 IR·기업설명회 공시 및 기존 잠정실적 일정",
+  "updated": "2026-07-19 23:58 KST",
   "startDate": "2026-07-16",
   "endDate": "2026-08-14",
   "entries": [
     {
       "date": "2026-07-22",
       "session": "tba",
-      "name": "LG디스플레이"
+      "name": "LG디스플레이",
+      "ticker": "034220",
+      "market": "KOSPI",
+      "time": "10:00",
+      "detail": "오전 10:00 · 공식 확인"
     },
     {
       "date": "2026-07-22",
       "session": "tba",
-      "name": "OCI홀딩스"
+      "name": "OCI",
+      "ticker": "456040",
+      "market": "KOSPI",
+      "time": "15:30",
+      "detail": "오후 3:30 · 공식 확인"
     },
     {
       "date": "2026-07-22",
       "session": "tba",
-      "name": "OCI"
+      "name": "유니드",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-22",
       "session": "tba",
-      "name": "유니드"
-    },
-    {
-      "date": "2026-07-22",
-      "session": "tba",
-      "name": "제주은행"
+      "name": "제주은행",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-23",
       "session": "tba",
-      "name": "삼성E&A"
+      "name": "삼성E&A",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-23",
       "session": "tba",
-      "name": "삼성바이오로직스"
+      "name": "삼성바이오로직스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-23",
       "session": "tba",
-      "name": "두산밥캣"
+      "name": "두산밥캣",
+      "ticker": "241560",
+      "market": "KOSPI",
+      "time": "15:30",
+      "detail": "오후 3:30 · 공식 확인"
     },
     {
       "date": "2026-07-23",
       "session": "tba",
-      "name": "KB금융"
+      "name": "KB금융",
+      "ticker": "105560",
+      "market": "KOSPI",
+      "time": "16:00",
+      "detail": "오후 4:00 · 공식 확인"
     },
     {
       "date": "2026-07-23",
       "session": "tba",
-      "name": "신한지주"
+      "name": "신한지주",
+      "ticker": "055550",
+      "market": "KOSPI",
+      "time": "14:00",
+      "detail": "오후 2:00 · 공식 확인"
+    },
+    {
+      "date": "2026-07-23",
+      "session": "tba",
+      "name": "OCI홀딩스",
+      "ticker": "010060",
+      "market": "KOSPI",
+      "time": "15:30",
+      "detail": "오후 3:30 · 공식 확인"
     },
     {
       "date": "2026-07-24",
       "session": "tba",
-      "name": "삼성중공업"
+      "name": "삼성중공업",
+      "ticker": "010140",
+      "market": "KOSPI",
+      "time": "16:00",
+      "detail": "오후 4:00 · 공식 확인"
     },
     {
       "date": "2026-07-24",
       "session": "tba",
-      "name": "삼성에피스홀딩스"
+      "name": "삼성에피스홀딩스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-24",
       "session": "tba",
-      "name": "현대로템"
+      "name": "현대로템",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-24",
       "session": "tba",
-      "name": "현대제철"
+      "name": "현대제철",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-24",
       "session": "tba",
-      "name": "현대모비스"
+      "name": "현대모비스",
+      "ticker": "012330",
+      "market": "KOSPI",
+      "time": "10:10",
+      "detail": "오전 10:10 · 공식 확인"
     },
     {
       "date": "2026-07-24",
       "session": "tba",
-      "name": "LX세미콘"
+      "name": "LX세미콘",
+      "ticker": "108320",
+      "market": "KOSPI",
+      "time": "11:00",
+      "detail": "오전 11:00 · 공식 확인"
     },
     {
       "date": "2026-07-24",
       "session": "tba",
-      "name": "제일기획"
+      "name": "제일기획",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-27",
       "session": "tba",
-      "name": "LG이노텍"
+      "name": "LG이노텍",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-27",
       "session": "tba",
-      "name": "한화오션"
+      "name": "한화오션",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-27",
       "session": "tba",
-      "name": "HD현대마린솔루션"
+      "name": "HD현대마린솔루션",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-27",
       "session": "tba",
-      "name": "HDC랩스"
+      "name": "HDC랩스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-28",
       "session": "tba",
-      "name": "한미사이언스"
+      "name": "한미사이언스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-28",
       "session": "tba",
-      "name": "한미약품"
+      "name": "한미약품",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-29",
@@ -126,33 +176,42 @@
       "name": "SK하이닉스",
       "ticker": "000660",
       "market": "KOSPI",
-      "detail": "오전 9시",
+      "time": "09:00",
+      "detail": "오전 9:00 · 공식 확인",
       "hl": true
     },
     {
       "date": "2026-07-29",
       "session": "tba",
-      "name": "HD한국조선해양"
+      "name": "HD한국조선해양",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-29",
       "session": "tba",
-      "name": "GS건설"
+      "name": "GS건설",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-29",
       "session": "tba",
-      "name": "한화솔루션"
+      "name": "한화솔루션",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-29",
       "session": "tba",
-      "name": "크래프톤"
+      "name": "크래프톤",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-29",
       "session": "tba",
-      "name": "넥센타이어"
+      "name": "넥센타이어",
+      "ticker": "002350",
+      "market": "KOSPI",
+      "time": "15:30",
+      "detail": "오후 3:30 · 공식 확인"
     },
     {
       "date": "2026-07-30",
@@ -160,408 +219,519 @@
       "name": "삼성전자",
       "ticker": "005930",
       "market": "KOSPI",
-      "detail": "오전 10시",
+      "time": "10:00",
+      "detail": "오전 10:00 · 공식 확인",
       "hl": true
     },
     {
       "date": "2026-07-30",
       "session": "tba",
-      "name": "삼성전기"
+      "name": "LG에너지솔루션",
+      "ticker": "373220",
+      "market": "KOSPI",
+      "time": "10:00",
+      "detail": "오전 10:00 · 공식 확인"
     },
     {
       "date": "2026-07-30",
       "session": "tba",
-      "name": "POSCO홀딩스"
+      "name": "삼성전기",
+      "ticker": "009150",
+      "market": "KOSPI",
+      "time": "13:30",
+      "detail": "오후 1:30 · 공식 확인"
     },
     {
       "date": "2026-07-30",
       "session": "tba",
-      "name": "LG에너지솔루션"
+      "name": "POSCO홀딩스",
+      "ticker": "005490",
+      "market": "KOSPI",
+      "time": "15:00",
+      "detail": "오후 3:00 · 공식 확인"
     },
     {
       "date": "2026-07-30",
       "session": "tba",
-      "name": "삼성SDI"
+      "name": "삼성SDI",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-30",
       "session": "tba",
-      "name": "SK아이이테크놀로지"
+      "name": "SK아이이테크놀로지",
+      "ticker": "361610",
+      "market": "KOSPI",
+      "time": "16:00",
+      "detail": "오후 4:00 · 공식 확인"
     },
     {
       "date": "2026-07-30",
       "session": "tba",
-      "name": "삼성에스디에스"
+      "name": "삼성에스디에스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-30",
       "session": "tba",
-      "name": "케이뱅크"
+      "name": "케이뱅크",
+      "ticker": "279570",
+      "market": "KOSPI",
+      "time": "16:00",
+      "detail": "오후 4:00 · 공식 확인"
     },
     {
       "date": "2026-07-31",
       "session": "tba",
-      "name": "LG화학"
+      "name": "LG화학",
+      "ticker": "051910",
+      "market": "KOSPI",
+      "time": "14:00",
+      "detail": "오후 2:00 · 공식 확인"
     },
     {
       "date": "2026-07-31",
       "session": "tba",
-      "name": "에코프로비엠"
+      "name": "에코프로비엠",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-31",
       "session": "tba",
-      "name": "한온시스템"
+      "name": "한온시스템",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-31",
       "session": "tba",
-      "name": "현대건설"
+      "name": "현대건설",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-31",
       "session": "tba",
-      "name": "한화에어로스페이스"
+      "name": "한화에어로스페이스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-07-31",
       "session": "tba",
-      "name": "LG씨엔에스"
+      "name": "LG씨엔에스",
+      "ticker": "064400",
+      "market": "KOSPI",
+      "time": "10:30",
+      "detail": "오전 10:30 · 공식 확인"
     },
     {
       "date": "2026-08-04",
       "session": "tba",
-      "name": "에코프로"
+      "name": "에코프로",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-04",
       "session": "tba",
-      "name": "에코프로머티"
+      "name": "에코프로머티",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-04",
       "session": "tba",
-      "name": "에코프로에이치엔"
+      "name": "에코프로에이치엔",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-05",
       "session": "tba",
-      "name": "카카오뱅크"
+      "name": "카카오뱅크",
+      "ticker": "323410",
+      "market": "KOSPI",
+      "time": "10:00",
+      "detail": "오전 10:00 · 공식 확인"
     },
     {
       "date": "2026-08-06",
       "session": "tba",
-      "name": "LG유플러스"
+      "name": "LG유플러스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-06",
       "session": "tba",
-      "name": "CJ ENM"
+      "name": "CJ ENM",
+      "ticker": "035760",
+      "market": "KOSDAQ",
+      "time": "14:00",
+      "detail": "오후 2:00 · 공식 확인"
     },
     {
       "date": "2026-08-06",
       "session": "tba",
-      "name": "스튜디오드래곤"
+      "name": "스튜디오드래곤",
+      "ticker": "253450",
+      "market": "KOSDAQ",
+      "time": "14:00",
+      "detail": "오후 2:00 · 공식 확인"
     },
     {
       "date": "2026-08-07",
       "session": "tba",
-      "name": "파마리서치"
+      "name": "파마리서치",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-13",
       "session": "tba",
-      "name": "달바글로벌"
+      "name": "달바글로벌",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "삼양식품"
+      "name": "삼양식품",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "피에스케이"
+      "name": "피에스케이",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "피에스케이홀딩스"
+      "name": "피에스케이홀딩스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "HPSP"
+      "name": "HPSP",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "예스티"
+      "name": "예스티",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "프로텍"
+      "name": "프로텍",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "하나마이크론"
+      "name": "하나마이크론",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "티에스이"
+      "name": "티에스이",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "마이크로투나노"
+      "name": "마이크로투나노",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "두산테스나"
+      "name": "두산테스나",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "LB세미콘"
+      "name": "LB세미콘",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "와이씨"
+      "name": "와이씨",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "유니테스트"
+      "name": "유니테스트",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "인텍플러스"
+      "name": "인텍플러스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "제우스"
+      "name": "제우스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "마이크로컨텍솔"
+      "name": "마이크로컨텍솔",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "오킨스전자"
+      "name": "오킨스전자",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "메가터치"
+      "name": "메가터치",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "웰덱스"
+      "name": "웰덱스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "에프에스티"
+      "name": "에프에스티",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "솔브레인"
+      "name": "솔브레인",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "솔브레인홀딩스"
+      "name": "솔브레인홀딩스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "KX하이텍"
+      "name": "KX하이텍",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "와이씨켐"
+      "name": "와이씨켐",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "이엔에프테크놀로지"
+      "name": "이엔에프테크놀로지",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "덕산테코피아"
+      "name": "덕산테코피아",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "퓨릿"
+      "name": "퓨릿",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "에스에이엠티"
+      "name": "에스에이엠티",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "유니퀘스트"
+      "name": "유니퀘스트",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "미코"
+      "name": "미코",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "제주반도체"
+      "name": "제주반도체",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "코리아써키트"
+      "name": "코리아써키트",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "이수페타시스"
+      "name": "이수페타시스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "한양디지텍"
+      "name": "한양디지텍",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "타이거일렉"
+      "name": "타이거일렉",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "덕산하이메탈"
+      "name": "덕산하이메탈",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "인터플렉스"
+      "name": "인터플렉스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "기가비스"
+      "name": "기가비스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "삼화콘덴서"
+      "name": "삼화콘덴서",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "아모텍"
+      "name": "아모텍",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "LS"
+      "name": "LS",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "LS ELECTRIC"
+      "name": "LS ELECTRIC",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "LS머트리얼즈"
+      "name": "LS머트리얼즈",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "가온전선"
+      "name": "가온전선",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "비에이치아이"
+      "name": "비에이치아이",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "보성파워텍"
+      "name": "보성파워텍",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "비나텍"
+      "name": "비나텍",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "아모센스"
+      "name": "아모센스",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "서진시스템"
+      "name": "서진시스템",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "한진칼"
+      "name": "한진칼",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "대웅제약"
+      "name": "대웅제약",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "제닉"
+      "name": "제닉",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "STX엔진"
+      "name": "STX엔진",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "세진중공업"
+      "name": "세진중공업",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "아이티센글로벌"
+      "name": "아이티센글로벌",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "이수화학"
+      "name": "이수화학",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "이수스페셜티케미컬"
+      "name": "이수스페셜티케미컬",
+      "detail": "시간 미공개"
     },
     {
       "date": "2026-08-14",
       "session": "tba",
-      "name": "현대해상"
+      "name": "현대해상",
+      "detail": "시간 미공개"
     }
   ]
 }
