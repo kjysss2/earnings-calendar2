@@ -1,67 +1,690 @@
 #!/usr/bin/env python3
-"""Validate or regenerate the static screenshot-style earnings calendar data."""
+"""2026년 2분기 한국 실적발표 캘린더 JSON 생성."""
 
-from __future__ import annotations
-
-import argparse
 import json
-from pathlib import Path
+import os
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 
-ROOT = Path(__file__).resolve().parents[1]
-DATA_FILE = ROOT / "data" / "calendar.json"
-
-
-def load_calendar() -> dict:
-    with DATA_FILE.open("r", encoding="utf-8") as file:
-        return json.load(file)
-
-
-def validate_calendar(data: dict) -> None:
-    if data.get("title") != "한국 잠정실적발표 일정(변동 가능)":
-        raise ValueError("Unexpected calendar title")
-
-    columns = data.get("columns")
-
-    if not isinstance(columns, list) or len(columns) != 12:
-        raise ValueError("calendar.json must contain 12 date columns")
-
-    for column in columns:
-        if not column.get("label"):
-            raise ValueError("Every column needs a label")
-
-        companies = column.get("companies")
-
-        if not isinstance(companies, list):
-            raise ValueError(f"{column.get('label')} companies must be a list")
-
-        for company in companies:
-            if not company.get("name"):
-                raise ValueError(f"{column.get('label')} has an empty company name")
-
-
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--check",
-        action="store_true",
-        help="Only validate data/calendar.json.",
+ROOT = os.path.dirname(
+    os.path.dirname(
+        os.path.abspath(__file__)
     )
-    args = parser.parse_args()
+)
 
-    data = load_calendar()
-    validate_calendar(data)
+OUTPUT_FILE = os.path.join(
+    ROOT,
+    "data",
+    "calendar.json",
+)
 
-    if args.check:
-        print("calendar.json is valid")
-        return
+START_DATE = "2026-07-16"
+END_DATE = "2026-08-14"
 
-    DATA_FILE.write_text(
-        json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+
+# ============================================================
+# 실적발표 일정
+#
+# 기존 일정과 첨부 이미지의 잠정 일정을 병합했습니다.
+# 같은 기업이 서로 다른 날짜에 있으면
+# 기존 일정을 삭제하지 않고 모두 유지합니다.
+# ============================================================
+
+SCHEDULE = {
+    "2026-07-22": [
+        "LG디스플레이",
+        "OCI홀딩스",
+        "OCI",
+        "유니드",
+        "제주은행",
+    ],
+
+    "2026-07-23": [
+        "LS ELECTRIC",
+        "SGC에너지",
+        "두산밥캣",
+        "현대차",
+        "현대글로비스",
+        "삼성바이오로직스",
+        "KB금융",
+        "신한지주",
+        "JB금융지주",
+        "삼성E&A",
+        "HDC현대산업개발",
+        "OCI홀딩스",
+    ],
+
+    "2026-07-24": [
+        "삼성중공업",
+        "삼성에피스홀딩스",
+        "현대로템",
+        "기아",
+        "현대모비스",
+        "현대위아",
+        "LX세미콘",
+        "제일기획",
+        "두산로보틱스",
+        "두산퓨얼셀",
+        "하나금융지주",
+        "우리금융지주",
+        "현대제철",
+    ],
+
+    "2026-07-27": [
+        "두산",
+        "두산에너빌리티",
+        "LG이노텍",
+        "SKC",
+        "한화오션",
+        "HD현대마린솔루션",
+        "HDC랩스",
+        "iM금융지주",
+        "기업은행",
+        "동양생명",
+        "삼성카드",
+        "동아에스티",
+        "에스티팜",
+    ],
+
+    "2026-07-28": [
+        "HD현대일렉트릭",
+        "한화시스템",
+        "한미사이언스",
+        "한미약품",
+        "대우건설",
+        "BNK금융지주",
+    ],
+
+    "2026-07-29": [
+        "SK하이닉스",
+        "HD한국조선해양",
+        "한국항공우주",
+        "삼성물산",
+        "GS건설",
+        "한화솔루션",
+        "크래프톤",
+        "현대오토에버",
+        "넥센타이어",
+        "LG생활건강",
+    ],
+
+    "2026-07-30": [
+        "삼성전자",
+        "삼성전기",
+        "한화비전",
+        "대한전선",
+        "POSCO홀딩스",
+        "포스코퓨처엠",
+        "포스코인터내셔널",
+        "포스코스틸리온",
+        "포스코DX",
+        "LG에너지솔루션",
+        "삼성SDI",
+        "SK아이이테크놀로지",
+        "SK이노베이션",
+        "롯데정밀화학",
+        "DL이앤씨",
+        "금호타이어",
+        "대한조선",
+        "삼성에스디에스",
+        "키움증권",
+        "케이뱅크",
+        "유한양행",
+        "야놀자",
+        "아모레퍼시픽",
+        "일동제약",
+        "일동홀딩스",
+        "제이브이엠",
+        "LX하우시스",
+    ],
+
+    "2026-07-31": [
+        "대덕전자",
+        "LG화학",
+        "에코프로비엠",
+        "한온시스템",
+        "동원시스템즈",
+        "현대건설",
+        "한화에어로스페이스",
+        "한화엔진",
+        "HD현대",
+        "풍산",
+        "풍산홀딩스",
+        "SOOP",
+        "종근당",
+        "F&F",
+        "호텔신라",
+        "에스원",
+    ],
+
+    "2026-08-03": [
+        "현대제철",
+        "S-Oil",
+        "DL",
+        "LX인터내셔널",
+        "현대바이오랜드",
+        "현대퓨처넷",
+        "이수",
+    ],
+
+    "2026-08-04": [
+        "에코프로",
+        "에코프로머티",
+        "에코프로에이치엔",
+        "삼성증권",
+        "카카오페이",
+        "한화",
+        "HDC",
+        "대우건설",
+        "GS파워",
+        "현대그린푸드",
+        "현대이지웰",
+        "현대리바트",
+        "지누스",
+        "강원랜드",
+        "넥써쓰",
+    ],
+
+    "2026-08-05": [
+        "에이피알",
+        "LS에코에너지",
+        "카카오뱅크",
+        "카카오게임즈",
+        "이수앱지스",
+        "SK텔레콤",
+        "현대백화점",
+        "롯데렌탈",
+        "롯데칠성",
+    ],
+
+    "2026-08-06": [
+        "엘앤에프",
+        "롯데에너지머티리얼즈",
+        "LIG넥스원",
+        "카카오",
+        "LG유플러스",
+        "CJ ENM",
+        "스튜디오드래곤",
+        "CJ프레시웨이",
+        "KT&G",
+        "웹젠",
+        "레드캡투어",
+        "케이피에프",
+    ],
+
+    "2026-08-07": [
+        "산일전기",
+        "씨에스윈드",
+        "파마리서치",
+        "NAVER",
+        "롯데쇼핑",
+        "GS리테일",
+        "롯데케미칼",
+        "금호석유",
+        "코오롱인더",
+        "인테로조",
+    ],
+
+    "2026-08-10": [
+        "콜마홀딩스",
+    ],
+
+    "2026-08-11": [
+        "NC",
+        "펄어비스",
+        "시프트업",
+        "NHN",
+        "CJ제일제당",
+        "CJ대한통운",
+        "한국타이어앤테크놀로지",
+        "한화생명",
+    ],
+
+    "2026-08-12": [
+        "미래에셋증권",
+        "메리츠금융지주",
+        "위메이드",
+        "위메이드맥스",
+        "네오위즈",
+        "컴투스홀딩스",
+        "컴투스",
+    ],
+
+    "2026-08-13": [
+        "달바글로벌",
+        "삼성생명",
+        "LG",
+    ],
+
+    "2026-08-14": [
+        "삼양식품",
+        "피에스케이",
+        "피에스케이홀딩스",
+        "HPSP",
+        "예스티",
+        "프로텍",
+        "하나마이크론",
+        "티에스이",
+        "마이크로투나노",
+        "두산테스나",
+        "LB세미콘",
+        "와이씨",
+        "유니테스트",
+        "인텍플러스",
+        "제우스",
+        "마이크로컨텍솔",
+        "오킨스전자",
+        "메가터치",
+        "월덱스",
+        "에프에스티",
+        "솔브레인",
+        "솔브레인홀딩스",
+        "KX하이텍",
+        "와이씨켐",
+        "이엔에프테크놀로지",
+        "덕산테코피아",
+        "퓨릿",
+        "에스에이엠티",
+        "유니퀘스트",
+        "미코",
+        "제주반도체",
+        "코리아써키트",
+        "이수페타시스",
+        "한양디지텍",
+        "타이거일렉",
+        "덕산하이메탈",
+        "인터플렉스",
+        "기가비스",
+        "삼화콘덴서",
+        "아모텍",
+        "LS",
+        "LS머트리얼즈",
+        "비에이치아이",
+        "보성파워텍",
+        "비나텍",
+        "아모센스",
+        "서진시스템",
+        "한진칼",
+        "제닉",
+        "STX엔진",
+        "세진중공업",
+        "아이티센글로벌",
+        "이수화학",
+        "이수스페셜티케미컬",
+        "현대해상",
+    ],
+
+}
+
+
+# ============================================================
+# 공식 발표시간
+#
+# 정확한 개최시각이 확인된 일정만 등록합니다.
+#
+# 기업명만 키로 사용하면 같은 기업이 다른 날짜에도 있을 때
+# 잘못된 시간이 표시될 수 있으므로
+# (날짜, 기업명) 조합을 키로 사용합니다.
+# ============================================================
+
+CONFIRMED_TIMES = {
+    # 7월 22일
+    ("2026-07-22", "LG디스플레이"): "10:00",
+    ("2026-07-22", "OCI"): "15:30",
+
+    # 7월 23일
+    ("2026-07-23", "신한지주"): "14:00",
+    ("2026-07-23", "두산밥캣"): "15:30",
+    ("2026-07-23", "OCI홀딩스"): "15:30",
+    ("2026-07-23", "KB금융"): "16:00",
+
+    # 7월 24일
+    ("2026-07-24", "현대모비스"): "10:10",
+    ("2026-07-24", "LX세미콘"): "11:00",
+    ("2026-07-24", "삼성중공업"): "16:00",
+
+    # 7월 29일
+    ("2026-07-29", "SK하이닉스"): "09:00",
+    ("2026-07-29", "넥센타이어"): "15:30",
+
+    # 7월 30일
+    ("2026-07-30", "삼성전자"): "10:00",
+    ("2026-07-30", "LG에너지솔루션"): "10:00",
+    ("2026-07-30", "삼성전기"): "13:30",
+    ("2026-07-30", "POSCO홀딩스"): "15:00",
+    ("2026-07-30", "SK아이이테크놀로지"): "16:00",
+    ("2026-07-30", "케이뱅크"): "16:00",
+
+    # 7월 31일
+    ("2026-07-31", "LG씨엔에스"): "10:30",
+    ("2026-07-31", "LG화학"): "14:00",
+
+    # 8월 5일
+    ("2026-08-05", "카카오뱅크"): "10:00",
+
+    # 8월 6일
+    ("2026-08-06", "CJ ENM"): "14:00",
+    ("2026-08-06", "스튜디오드래곤"): "14:00",
+}
+
+
+# ============================================================
+# 종목코드 및 시장 정보
+#
+# 등록되지 않은 기업도 회사명과 발표시간은 정상 표시됩니다.
+# ============================================================
+
+COMPANY_META = {
+    "LG디스플레이": {
+        "ticker": "034220",
+        "market": "KOSPI",
+    },
+
+    "OCI": {
+        "ticker": "456040",
+        "market": "KOSPI",
+    },
+
+    "OCI홀딩스": {
+        "ticker": "010060",
+        "market": "KOSPI",
+    },
+
+    "두산밥캣": {
+        "ticker": "241560",
+        "market": "KOSPI",
+    },
+
+    "KB금융": {
+        "ticker": "105560",
+        "market": "KOSPI",
+    },
+
+    "신한지주": {
+        "ticker": "055550",
+        "market": "KOSPI",
+    },
+
+    "삼성중공업": {
+        "ticker": "010140",
+        "market": "KOSPI",
+    },
+
+    "현대모비스": {
+        "ticker": "012330",
+        "market": "KOSPI",
+    },
+
+    "LX세미콘": {
+        "ticker": "108320",
+        "market": "KOSPI",
+    },
+
+    "SK하이닉스": {
+        "ticker": "000660",
+        "market": "KOSPI",
+    },
+
+    "넥센타이어": {
+        "ticker": "002350",
+        "market": "KOSPI",
+    },
+
+    "삼성전자": {
+        "ticker": "005930",
+        "market": "KOSPI",
+    },
+
+    "LG에너지솔루션": {
+        "ticker": "373220",
+        "market": "KOSPI",
+    },
+
+    "삼성전기": {
+        "ticker": "009150",
+        "market": "KOSPI",
+    },
+
+    "POSCO홀딩스": {
+        "ticker": "005490",
+        "market": "KOSPI",
+    },
+
+    "SK아이이테크놀로지": {
+        "ticker": "361610",
+        "market": "KOSPI",
+    },
+
+    "케이뱅크": {
+        "ticker": "279570",
+        "market": "KOSPI",
+    },
+
+    "LG화학": {
+        "ticker": "051910",
+        "market": "KOSPI",
+    },
+
+    "LG씨엔에스": {
+        "ticker": "064400",
+        "market": "KOSPI",
+    },
+
+    "카카오뱅크": {
+        "ticker": "323410",
+        "market": "KOSPI",
+    },
+
+    "CJ ENM": {
+        "ticker": "035760",
+        "market": "KOSDAQ",
+    },
+
+    "스튜디오드래곤": {
+        "ticker": "253450",
+        "market": "KOSDAQ",
+    },
+}
+
+
+# ============================================================
+# 빨간색 강조 종목
+#
+# 기존과 동일하게 삼성전자와 SK하이닉스를
+# 빨간색으로 표시합니다.
+# ============================================================
+
+HIGHLIGHT_COMPANIES = {
+    "SK하이닉스",
+    "삼성전자",
+}
+
+
+def format_korean_time(value):
+    """
+    24시간 형식의 HH:MM을
+    오전/오후 형식으로 변환합니다.
+
+    예:
+    09:00 → 오전 9:00
+    13:30 → 오후 1:30
+    16:00 → 오후 4:00
+    """
+
+    hour, minute = map(
+        int,
+        value.split(":"),
+    )
+
+    if hour < 12:
+        period = "오전"
+    else:
+        period = "오후"
+
+    if hour == 0:
+        display_hour = 12
+    elif hour > 12:
+        display_hour = hour - 12
+    else:
+        display_hour = hour
+
+    return (
+        f"{period} "
+        f"{display_hour}:"
+        f"{minute:02d}"
+    )
+
+
+def make_entry(date, name):
+    """
+    캘린더에 들어갈 개별 기업 데이터를 만듭니다.
+    """
+
+    entry = {
+        "date": date,
+        "session": "tba",
+        "name": name,
+    }
+
+    # 종목코드 및 시장 정보 추가
+    meta = COMPANY_META.get(name)
+
+    if meta:
+        entry.update(meta)
+
+    # 공식 발표시간 추가
+    confirmed_time = CONFIRMED_TIMES.get(
+        (date, name)
+    )
+
+    if confirmed_time:
+        entry["time"] = confirmed_time
+        entry["detail"] = (
+            f"{format_korean_time(confirmed_time)}"
+            " · 공식 확인"
+        )
+    else:
+        entry["detail"] = "시간 미공개"
+
+    # 삼성전자와 SK하이닉스 빨간색 강조
+    if name in HIGHLIGHT_COMPANIES:
+        entry["hl"] = True
+
+    return entry
+
+
+def build_calendar():
+    """
+    전체 캘린더 데이터를 생성합니다.
+    """
+
+    entries = [
+        make_entry(
+            date,
+            name,
+        )
+        for date, names in SCHEDULE.items()
+        for name in names
+    ]
+
+    now = datetime.now(
+        ZoneInfo("Asia/Seoul")
+    )
+
+    return {
+        "title": (
+            "한국 잠정실적발표 일정"
+            "(시간 포함·변동 가능)"
+        ),
+
+        "source": (
+            "기업 IR·기업설명회 공시, "
+            "기존 잠정실적 일정 및 "
+            "첨부 이미지 일정"
+        ),
+
+        "updated": now.strftime(
+            "%Y-%m-%d %H:%M KST"
+        ),
+
+        "startDate": START_DATE,
+        "endDate": END_DATE,
+        "entries": entries,
+    }
+
+
+def write_json(path, data):
+    """
+    생성한 데이터를 JSON 파일로 저장합니다.
+    """
+
+    os.makedirs(
+        os.path.dirname(path),
+        exist_ok=True,
+    )
+
+    with open(
+        path,
+        "w",
         encoding="utf-8",
+    ) as file:
+        json.dump(
+            data,
+            file,
+            ensure_ascii=False,
+            indent=2,
+        )
+
+        file.write("\n")
+
+
+def main():
+    calendar = build_calendar()
+
+    write_json(
+        OUTPUT_FILE,
+        calendar,
     )
-    print(f"wrote {DATA_FILE}")
+
+    confirmed_count = sum(
+        1
+        for entry in calendar["entries"]
+        if entry.get("time")
+    )
+
+    unknown_count = (
+        len(calendar["entries"])
+        - confirmed_count
+    )
+
+    print(
+        f"Updated: {OUTPUT_FILE}"
+    )
+
+    print(
+        f"Entries: "
+        f"{len(calendar['entries'])}"
+    )
+
+    print(
+        f"Confirmed times: "
+        f"{confirmed_count}"
+    )
+
+    print(
+        f"Unknown times: "
+        f"{unknown_count}"
+    )
+
+    print(
+        f"Range: "
+        f"{calendar['startDate']} "
+        f"~ "
+        f"{calendar['endDate']}"
+    )
 
 
 if __name__ == "__main__":
     main()
+
