@@ -1,27 +1,57 @@
-name: Static earnings calendar check
+name: StockEasy earnings calendar update
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
     paths:
       - index.html
-      - styles.css
-      - app.js
-      - data/calendar.json
+      - README.md
       - scripts/update_stockeasy_calendar.py
       - .github/workflows/update.yml
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: stockeasy-calendar-sync
+  cancel-in-progress: false
 
 jobs:
-  check:
+  update:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Validate calendar JSON
-        run: python scripts/update_stockeasy_calendar.py --check
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Update StockEasy earnings calendar
+        run: python scripts/update_stockeasy_calendar.py
+
+      - name: Commit updated calendar data
+        run: |
+          if git diff --quiet -- data/calendar.json; then
+            echo "No earnings calendar changes."
+            exit 0
+          fi
+
+          git config user.name "earnings-bot"
+          git config user.email "actions@github.com"
+
+          git add data/calendar.json
+          git commit -m "Auto update: StockEasy earnings calendar"
+
+          git pull --rebase origin main
+          git push origin HEAD:main
+
