@@ -1,21 +1,23 @@
-# Earnings Calendar (GitHub Pages)
+# earnings-calendar2 GitHub Pages source
 
-This site shows only the StockEasy market-calendar earnings announcement category in the same weekly calendar layout used by the existing page.
+This is a static GitHub Pages version matching the supplied screenshot.
 
-## Data Update
+## Files to upload to `kjysss2/earnings-calendar2`
 
-.github/workflows/update.yml runs every 3 hours and writes data/calendar.json from:
+- `index.html`
+- `styles.css`
+- `app.js`
+- `data/calendar.json`
+- `.nojekyll`
 
-https://stockeasy.intellio.kr/stockdata/api/v1/market-calendar?category=earnings
+Recommended replacements to avoid the old automated updater overwriting `data/calendar.json`:
 
-The browser only reads the local JSON file, which avoids cross-origin browser fetch issues.
+- `.github/workflows/update.yml`
+- `scripts/update_stockeasy_calendar.py`
 
-## Manual Data Shape
+## GitHub Pages
 
-{"date":"2026-07-14","session":"tba","name":"Samsung Electronics","ticker":"005930","market":"KOSPI"}
+Use repository `kjysss2/earnings-calendar2`, branch `main`, folder `/`.
+After replacing the files above, the site should be available at:
 
-session may be before, after, or tba. StockEasy earnings events currently do not include a release time, so the updater writes tba and the page labels that row as earnings announcements.
-
-## Note
-
-Data source: StockEasy market calendar. This page is for schedule reference only.
+https://kjysss2.github.io/earnings-calendar2/
